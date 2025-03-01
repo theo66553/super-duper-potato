@@ -2,12 +2,24 @@
 --[[
     # Rewriten by: eclipse_wtf
 ]]
-if not gethui then 
-	gethui = function() return game.Players.LocalPlayer.PlayerGui end; IsStudio = true;
-end
 repeat
     task.wait()
  until game:IsLoaded()
+
+--// init
+cloneref = cloneref ~= nil and cloneref or function(f) return f end; 
+getgenv = getgenv ~= nil and getgenv or function() return _G end; 
+if not gethui then gethui = function() return game:GetService("Players").LocalPlayer.PlayerGui end end;
+local environment = setmetatable({}, { __index = function(_, index)
+local v = index:gsub("_%l", string.upper):gsub("_", ""):gsub("^%l", string.upper);
+return cloneref(game:GetService(v));
+end});
+local Workspace, RunService, UserInputService, Players, LocalPlayer, Camera, GuiService, Mouse, OsClock, Clone_Lighting, TweenService = cloneref(game:GetService("Workspace")), cloneref(game:GetService("RunService")), cloneref(game:GetService("UserInputService")), cloneref(game:GetService("Players")), cloneref(game:GetService("Players")).LocalPlayer, cloneref(game:GetService("Workspace").CurrentCamera), cloneref(game:GetService("GuiService")), cloneref(game:GetService("Players")).LocalPlayer:GetMouse(), os.clock(), cloneref(game:GetService("Lighting")), game:GetService("TweenService")
+--
+
+if not gethui then 
+	gethui = function() return game.Players.LocalPlayer.PlayerGui end; IsStudio = true;
+end
  
  -- Menu/UI Creation
  if not isfile("eclipse.wtf") then
