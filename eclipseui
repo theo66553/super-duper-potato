@@ -2,24 +2,12 @@
 --[[
     # Rewriten by: eclipse_wtf
 ]]
-repeat
-    task.wait()
- until game:IsLoaded()
-
---// init
-cloneref = cloneref ~= nil and cloneref or function(f) return f end; 
-getgenv = getgenv ~= nil and getgenv or function() return _G end; 
-if not gethui then gethui = function() return game:GetService("Players").LocalPlayer.PlayerGui end end;
-local environment = setmetatable({}, { __index = function(_, index)
-local v = index:gsub("_%l", string.upper):gsub("_", ""):gsub("^%l", string.upper);
-return cloneref(game:GetService(v));
-end});
-local Workspace, RunService, UserInputService, Players, LocalPlayer, Camera, GuiService, Mouse, OsClock, Clone_Lighting, TweenService = cloneref(game:GetService("Workspace")), cloneref(game:GetService("RunService")), cloneref(game:GetService("UserInputService")), cloneref(game:GetService("Players")), cloneref(game:GetService("Players")).LocalPlayer, cloneref(game:GetService("Workspace").CurrentCamera), cloneref(game:GetService("GuiService")), cloneref(game:GetService("Players")).LocalPlayer:GetMouse(), os.clock(), cloneref(game:GetService("Lighting")), game:GetService("TweenService")
---
-
 if not gethui then 
 	gethui = function() return game.Players.LocalPlayer.PlayerGui end; IsStudio = true;
 end
+repeat
+    task.wait()
+ until game:IsLoaded()
  
  -- Menu/UI Creation
  if not isfile("eclipse.wtf") then
@@ -301,7 +289,7 @@ end
        while task.wait() do
          rotateGradient()
          local time = os.date("%X", os.time())
-         local ping = string.format('%.0f', game.Stats.Network.ServerStatsItem["Data Ping"]:GetValue())
+         local ping = string.format('%.0f', game:GetService("Stats.Network").ServerStatsItem["Data Ping"]:GetValue())
          local uid = "1"
          local fpsValue = string.split(game.Stats.Workspace.Heartbeat:GetValueString(), ".")[1]
          WaterMarkLabel.Text = 'eclipse.<font color="rgb(115, 100, 215)">wtf</font> - uid: <font color="rgb(115, 100, 215)">' .. uid .. '</font> / fps: <font color="rgb(115, 100, 215)">' .. fpsValue .. '</font> / ping: <font color="rgb(115, 100, 215)">' .. ping .. '</font> / time: <font color="rgb(115, 100, 215)">' .. time .. '</font>'
